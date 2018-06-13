@@ -3,7 +3,8 @@ console.log("Welcome to remindme");
 
 const reminderFile = "reminders.txt";
 
-
+//This is to wipe or delete the text file between each reminder session
+fs.unlinkSync(reminderFile);
 
 const reminders = [
     "get some milk", //0
