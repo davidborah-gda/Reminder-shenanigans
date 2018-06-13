@@ -32,3 +32,4 @@ for(let i = 0; i < reminders.length; i += 1){
 
 fs.writeFileSync(reminderFile, reminders);
 console.log("Wrote all of the reminders to the file");
+//End of the progam
