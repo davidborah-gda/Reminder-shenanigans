@@ -1,9 +1,7 @@
-const fs = require('fs');//this tells node that we need this module (set of fnctions and attributes)
+const fs = require('fs');//this tells node that we need this module (set of functions and attributes)
 console.log("Welcome to remindme");
 
 const reminderFile = "reminders.txt";
-
-fs.unlinkSync(reminderFile);//This is to wipe or delete the text file between each reminder session
 
 const reminders = [
     "get some milk", //0
@@ -21,7 +19,31 @@ const dates = [  //Adding an array for dates to match the reminder subject/body
     new Date()
 ];
 
-//for loop 
+//List command where all the reminders are printed
+//Add command where we can add a reminder
+
+const args = process.argv.slice(2);
+const subcommand = args[0];
+
+if(subcommand === 'list'){
+    list();
+}
+
+else if(subcommand === 'add'){
+    add();
+}
+
+else {
+    help();
+}
+
+
+console.log('Completed your request');
+process.exit(0);
+
+function add (){
+    console.log('add');
+    fs.unlinkSync(reminderFile);//This is to wipe or delete the text file between each reminder session 
 for(let i = 0; i < reminders.length; i += 1){
     const reminder = reminders[i];
     const date = dates[i];
@@ -29,4 +51,15 @@ for(let i = 0; i < reminders.length; i += 1){
     fs.appendFileSync(reminderFile, line);
 }
 
-console.log("Wrote all of the reminders to the file");
+function list (){
+    console.log('Here are the things that you need to do...');
+    reminders.forEach((reminder, index) => {
+        const line = `-   ${reminder}     Due:  ${dates [index]}`;
+        console.log(line);
+    });
+}
+}
+
+function help(){
+console.log('Please check your syntax');
+}
