@@ -1,5 +1,4 @@
 const fs = require('fs');//this tells node that we need this module (set of functions and attributes)
-console.log("Welcome to remindme");
 
 const reminderFile = "reminders.txt";
 
@@ -43,14 +42,14 @@ process.exit(0);
 function list (){
     console.log('Here are the things that you need to do...');
     reminders.forEach((reminder, index) => {
-        const line = `-   ${reminder}     Due:  ${dates [index]}`;
+        const line = `-   ${reminder}     Due:  ${dates[index]}`;
         console.log(line);
     });
 }
 
 function add (){
     console.log('add');
-    fs.unlinkSync(reminderFile);//This is to wipe or delete the text file between each reminder session 
+    fs.unlinkSync(reminderFile);
 for(let i = 0; i < reminders.length; i += 1){
     const reminder = reminders[i];
     const date = dates[i];
