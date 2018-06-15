@@ -37,9 +37,16 @@ else {
     help();
 }
 
-
 console.log('Completed your request');
 process.exit(0);
+
+function list (){
+    console.log('Here are the things that you need to do...');
+    reminders.forEach((reminder, index) => {
+        const line = `-   ${reminder}     Due:  ${dates [index]}`;
+        console.log(line);
+    });
+}
 
 function add (){
     console.log('add');
@@ -49,14 +56,6 @@ for(let i = 0; i < reminders.length; i += 1){
     const date = dates[i];
     const line = `${reminder}|${date}\n`;
     fs.appendFileSync(reminderFile, line);
-}
-
-function list (){
-    console.log('Here are the things that you need to do...');
-    reminders.forEach((reminder, index) => {
-        const line = `-   ${reminder}     Due:  ${dates [index]}`;
-        console.log(line);
-    });
 }
 }
 
