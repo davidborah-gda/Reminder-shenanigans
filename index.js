@@ -1,63 +1,57 @@
-const fs = require('fs');//this tells node that we need this module (set of functions and attributes)
+
+const fs = require('fs'); //this tells node that we need this module (set of functions and attributes)
 
 const reminderFile = "reminders.txt";
 
-const reminders = [
-    "get some milk", //0
-    "work out", //1
-    "get groceries", //2
-    "groom the dog", //3
-    "take a nap" //4
-];
-
-const dates = [  //Adding an array for dates to match the reminder subject/body
-    new Date(),
-    new Date(),
-    new Date(),
-    new Date(),
-    new Date()
-];
-
-//List command where all the reminders are printed
-//Add command where we can add a reminder
 
 const args = process.argv.slice(2);
 const subcommand = args[0];
-
 if(subcommand === 'list'){
     list();
-}
-
-else if(subcommand === 'add'){
-    add();
-}
-
-else {
+} else if(subcommand === 'add'){
+    const reminder = args[1];
+    add(reminder);    
+} else {
     help();
 }
 
-console.log('Completed your request');
+console.log("Completed your request.");
 process.exit(0);
 
-function list (){
+//List command where all the reminders are printed
+
+function list(){
     console.log('Here are the things that you need to do...');
-    reminders.forEach((reminder, index) => {
-        const line = `-   ${reminder}     Due:  ${dates[index]}`;
-        console.log(line);
+    const lines = fs.readFileSync(reminderFile, 'utf8').split('\n');
+    const parsedLines = lines.map(line => line.split("|"));
+    const humanFriendlyLines = parsedLines.map(parsedLine => {
+        const reminder = parsedLine[0];
+        const date = parsedLine[1];
+        return `-     ${reminder}           Due: ${date}`;
     });
+    const output = humanFriendlyLines.join('\n');
+    console.log(output);
 }
 
-function add (){
-    console.log('add');
+//Add command where we can add a reminder
+
+function add(addition){
+    console.log('Adding a new reminder...');
+    const lines = fs.readFileSync(reminderFile, 'utf8').split('\n');
+    const parsedLines = lines.map(line => line.split("|"));
+    // parsedLines.push([addition, new Date()]); optional
+    const newLine = [[addition, new Date()]];
+    const withAddition = parsedLines.concat(newLine);
     fs.unlinkSync(reminderFile);
-for(let i = 0; i < reminders.length; i += 1){
-    const reminder = reminders[i];
-    const date = dates[i];
-    const line = `${reminder}|${date}\n`;
-    fs.appendFileSync(reminderFile, line);
-}
+    const outputLines = withAddition.map(line => {
+        const reminder = line[0];
+        const date = line[1];
+        return `${reminder}|${date}`;
+    });
+    const output = outputLines.join('\n');
+    fs.appendFileSync(reminderFile, output);
 }
 
 function help(){
-console.log('Please check your syntax');
+    console.log('Please check your command syntax');
 }
