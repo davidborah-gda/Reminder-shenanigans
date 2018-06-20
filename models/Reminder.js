@@ -1,5 +1,6 @@
 
 //templates for objects
+const chalk = require('chalk');
 class Reminder {
     constructor(inputText, inputDueDate){
         this.text = inputText;
@@ -7,7 +8,8 @@ class Reminder {
     }
 
     toString(){
-        return `-     ${this.text}           Due: ${this.dueDate}`;
+        const dueLabel = chalk.bgGreen.black("Due");
+        return `-     ${chalk.green(this.text)}           ${dueLabel} ${chalk.red(this.dueDate)}`;
     }
 
     toFileString(){

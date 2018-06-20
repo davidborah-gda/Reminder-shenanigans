@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/davidborah-gda/Reminder-shenanigans/issues"
   },
-  "homepage": "https://github.com/davidborah-gda/Reminder-shenanigans#readme"
+  "homepage": "https://github.com/davidborah-gda/Reminder-shenanigans#readme",
+  "dependencies": {
+    "chalk": "^2.4.1"
+  }
 }

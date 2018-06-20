@@ -1,5 +1,7 @@
+const chalk = require('chalk');
+
 function help() {
-    console.log('Please check your command syntax');
+    console.log(chalk.blue.italic('Please check your command syntax'));
 }
 
 module.exports = help;
