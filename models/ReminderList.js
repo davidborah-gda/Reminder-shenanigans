@@ -5,7 +5,7 @@ const Reminder = require('./Reminder');
 class ReminderList {
     constructor(filepath) {
         this.filepath = filepath;
-        const lines = fs.readFileSync(reminderFile, 'utf8').split('\n');
+        const lines = fs.readFileSync(this.filepath, 'utf8').split('\n');
         const parsedLines = lines.map(line => line.split("|"));
         const humanFriendlyLines = parsedLines.map(parsedLine => {
             const reminder = new Reminder(parsedLine[0], parsedLine[1]);
