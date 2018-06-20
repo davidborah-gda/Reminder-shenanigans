@@ -1,7 +1,6 @@
 
 const ReminderList = require('../models/ReminderList');
-const config = require('../config');
-const reminderFile = config.reminderFile;
+const { reminderFile } = require('../config');
 
 
 function list() {
