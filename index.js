@@ -1,6 +1,7 @@
-const list = require('../commands/list');
-const add = require('../commands/add');
-const help = require('../commands/help');
+
+const list = require('./commands/list');
+const add = require('./commands/add');
+const help = require('./commands/help');
 
 const args = process.argv.slice(2);
 const subcommand = args[0];
