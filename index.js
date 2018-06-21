@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 
 const list = require('./commands/list');
 const add = require('./commands/add');
