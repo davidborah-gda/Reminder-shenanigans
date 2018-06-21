@@ -1,6 +1,8 @@
 
 const fs = require('fs');
 const Reminder = require('./Reminder');
+const moment = require('moment');
+const { dateFormat } = require('../config');
 
 class ReminderList {
     constructor(filepath){
@@ -8,7 +10,8 @@ class ReminderList {
         this.reminders = fs.readFileSync(this.filepath, 'utf8')
                             .split('\n')
                             .map((line) => line.split('|'))
-                            .map((parsedLine) => new Reminder(parsedLine[0], parsedLine[1]));
+                            .map((parsedLine) => 
+                                new Reminder(parsedLine[0], moment(parsedLine[1], dateFormat)));
     }
 
     add(reminder){
